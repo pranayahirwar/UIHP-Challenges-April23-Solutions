@@ -4,6 +4,14 @@ let isFocus = false;
 let jsInput;
 let jsDiv;
 
+const divInfo = ['div', `Hi, ${myName}!`];
+
+function fnConvert(elementInfo) {
+  let newEle = document.createElement(elementInfo[0])
+  newEle.textContent = elementInfo[1]
+  return newEle
+}
+
 function component() {
     // Line #1 & #2 if condition is used to focus our cursor again on newly rendred input element
     document.activeElement === jsInput ? (isFocus = true) : (isFocus = false); // Line #1
@@ -21,10 +29,11 @@ function component() {
 
     // Creating HTML Element in JS
     jsInput = document.createElement("input");
-    jsDiv = document.createElement("div");
+    jsDiv = fnConvert(divInfo)
 
     // Updating Data for input and div element.
-    jsDiv.textContent = (myName == "") ? "..." : myName;
+    // jsDiv.textContent = (myName == "") ? jsDiv.textContent : myName
+    jsDiv.textContent = (myName == "") ? "*^____^*" : myName
     jsInput.value = myName;
 
     // Attaching HTML Elements in JS to DOM
