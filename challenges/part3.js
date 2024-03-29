@@ -1,46 +1,53 @@
 let myName = "";
 let isFocus = false;
-
 let jsInput;
 let jsDiv;
 
-const divInfo = ['div', `Hi, ${myName}!`];
+let vDOM;
 
-function fnConvert(elementInfo) {
-  let newEle = document.createElement(elementInfo[0])
-  newEle.textContent = elementInfo[1]
-  return newEle
+function handleInput(event) {
+    myName = event.target.value;
+    console.log("I have been called: ", myName);
 }
 
-function component() {
-    // Line #1 & #2 if condition is used to focus our cursor again on newly rendred input element
-    document.activeElement === jsInput ? (isFocus = true) : (isFocus = false); // Line #1
+function createVDOM() {
+    return [
+        ["input", myName, handleInput],
+        ["div", myName],
+    ];
+}
 
-    /**
-     * Updating myName variable with value of jsInput.value before creating new jsInput element
-     *
-     * Below if condition mean, if jsInput is undefined then at this point we haven't created
-     * jsInput object, which contain HTML input element, because of which it won't have
-     * jsInput.value, So let's continue.
-     */
-    if (jsInput != undefined) {
-        myName = jsInput.value;
+function convert(elementInfo) {
+    // Convert passed array to DOM element.
+    let newEle = document.createElement(elementInfo[0]);
+    newEle.textContent = elementInfo[1];
+
+    if (elementInfo[0] == "input") {
+        newEle.value = elementInfo[1];
+        newEle.oninput = handleInput;
     }
 
-    // Creating HTML Element in JS
-    jsInput = document.createElement("input");
-    jsDiv = fnConvert(divInfo)
+    return newEle;
+}
 
-    // Updating Data for input and div element.
-    // jsDiv.textContent = (myName == "") ? jsDiv.textContent : myName
-    jsDiv.textContent = (myName == "") ? "*^____^*" : myName
-    jsInput.value = myName;
+function updateVDOM() {
+    // Line #1 & #2 if condition is used to focus our cursor again on newly rendred input
+    // element on which our cursor previously on.
+    document.activeElement === jsInput ? (isFocus = true) : (isFocus = false); // Line #1
 
+    vDOM = createVDOM();
+
+    // Creating elemetns from vDOM Array, by passing sub-array from array to map.
+    elems = vDOM.map(convert);
+    jsInput = elems[0];
+    jsDiv = elems[1];
+
+    // Convert passed array to DOM element.
     // Attaching HTML Elements in JS to DOM
-    document.body.replaceChildren(jsInput, jsDiv);
+    document.body.replaceChildren(...elems);
 
     if (isFocus) jsInput.focus(); // Line #2
 }
 
-setInterval(component, 1000);
-component();
+updateVDOM();
+// setInterval(updateVDOM, 1000);
