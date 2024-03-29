@@ -7,7 +7,7 @@ body {
 }
 
 input {
-    margin-top: 40vh;
+    margin-top: 20vh;
     margin-bottom: 3rem;
     width: 20rem;
     height: 3rem;
@@ -15,6 +15,9 @@ input {
 }
 
 div {
+    width: 80%;
+    margin: auto; 
+    border: 3px solid goldenrod;
     color: goldenrod;
-    font-size: xx-large;
+    font-size: x-large;
 }

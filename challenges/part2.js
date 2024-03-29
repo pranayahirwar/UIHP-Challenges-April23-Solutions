@@ -1,5 +1,47 @@
 /*
 #################################################
+# Part 2.2
+#################################################
+
+# Part 2.2 ask us to write one function, which is Responsible for all the UI changes
+
+*/
+let post = undefined;
+
+const jsInput = document.querySelector("input");
+const jsDiv = document.querySelector("div");
+
+function handleInput() {
+    post = jsInput.value;
+    dataIsChangedUpdateUI();
+}
+
+function fnRemoveDefaultValueOfjsInput() {
+    post = "";
+    dataIsChangedUpdateUI();
+}
+
+function dataIsChangedUpdateUI() {
+    // This function must contain all the code responsible for change in UI based on some
+    // kind of data (like post variable)
+
+    if (post == undefined) {
+        jsInput.value = "Enter What's on your mind !!!";
+    } else {
+        jsInput.value = post;
+        jsDiv.textContent = post;
+    }
+
+}
+
+// Another way to add Event Handler.
+jsInput.oninput = handleInput;
+jsInput.onclick = fnRemoveDefaultValueOfjsInput;
+
+dataIsChangedUpdateUI();
+
+/*
+#################################################
 # PART 2.1
 #################################################
 
