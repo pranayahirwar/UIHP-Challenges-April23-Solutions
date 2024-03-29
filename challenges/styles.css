@@ -1,7 +1,20 @@
 /*Yes...these styles are awful!*/
 
 body {
-    background-color: cornflowerblue;
-    color: linen;
+    background-color: black;
+    color: whitesmoke;
     text-align: center;
-  }
+}
+
+input {
+    margin-top: 40vh;
+    margin-bottom: 3rem;
+    width: 20rem;
+    height: 3rem;
+    font-size: large;
+}
+
+div {
+    color: goldenrod;
+    font-size: xx-large;
+}
