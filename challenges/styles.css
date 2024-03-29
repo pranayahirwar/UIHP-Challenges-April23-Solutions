@@ -16,8 +16,21 @@ input {
 
 div {
     width: 80%;
-    margin: auto; 
-    border: 3px solid goldenrod;
-    color: goldenrod;
+    margin: 0 auto 2rem auto;
+    border: 3px solid #d20062;
+    border-radius: 1rem;
     font-size: x-large;
+}
+
+.saved-data {
+    margin: 2rem auto 0 auto;
+    border: 3px solid greenyellow;
+    padding: 1rem;
+}
+
+.saved-data > div {
+    width: initial;
+    font-style: italic;
+    border: 3px solid rebeccapurple;
+    color: aquamarine;
 }
