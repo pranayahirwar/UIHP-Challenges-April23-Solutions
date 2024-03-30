@@ -26,11 +26,12 @@ function convert(elementInfo, isItChildElement, parentElement) {
     let newEle = document.createElement(elementInfo[0]);
 
     if (elementInfo[0] == "input") {
+        newEle.placeholder = "What's on your mind !!!"
         newEle.value = elementInfo[1];
         newEle.oninput = handleInput;
     } else {
         // Then it's div.
-        newEle.textContent = elementInfo[1];
+        newEle.textContent = myName == "" ? "..." : elementInfo[1];
     }
 
     // Extra Challenge: Creating Nested Elements
