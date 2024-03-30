@@ -1,3 +1,4 @@
+let isFocus = false;
 let myName = "";
 let vDOM;
 let elems;
@@ -45,4 +46,4 @@ function convert(node) {
 //     }
 // }
 
-updateDOM()
+updateDOM();
