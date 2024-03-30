@@ -7,24 +7,43 @@ let vDOM;
 
 function handleInput(event) {
     myName = event.target.value;
-    console.log("I have been called: ", myName);
 }
 
 function createVDOM() {
+    // Add below property to to return array to create nested element.
+    // ["div", "I am parent div", "_",
+    //        ["div", "I am 1st child element",  "_",
+    //              ["div", "I am 2nd child element"]]]
+
     return [
         ["input", myName, handleInput],
         ["div", myName],
     ];
 }
 
-function convert(elementInfo) {
+function convert(elementInfo, isItChildElement, parentElement) {
     // Convert passed array to DOM element.
     let newEle = document.createElement(elementInfo[0]);
-    newEle.textContent = elementInfo[1];
 
     if (elementInfo[0] == "input") {
         newEle.value = elementInfo[1];
         newEle.oninput = handleInput;
+    } else {
+        // Then it's div.
+        newEle.textContent = elementInfo[1];
+    }
+
+    // Extra Challenge: Creating Nested Elements
+    if (elementInfo[3] != undefined) {
+        // We are expecting 3rd Index to be Child element. So if undefined no requirement
+        // to create child or nested elements.
+        newEle = convert(elementInfo[3], true, newEle);
+    }
+
+    if (isItChildElement === true) {
+        // if elementInfo[3] value is defined, then isItChildElement is true.
+        parentElement.appendChild(newEle);
+        return parentElement;
     }
 
     return newEle;
@@ -50,4 +69,4 @@ function updateVDOM() {
 }
 
 updateVDOM();
-// setInterval(updateVDOM, 1000);
+setInterval(updateVDOM, 1000);
