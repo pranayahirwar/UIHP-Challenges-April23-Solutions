@@ -34,20 +34,23 @@ function createVDOM() {
         [
             "input",
             myName,
-            function handle() {
-                myName = jsInput.value;
+            function handle(event) {
+                myName = event.target.value;
             },
         ],
         ["div", `Hello, ${myName}!`],
+        ["div", `Great Job!`],
+        ["div", `Another Element...!`],
     ];
 }
 
 function updateDOM() {
     document.activeElement === jsInput ? (isFocus = true) : (isFocus = false);
     vDOM = createVDOM();
-    jsInput = convert(vDOM[0]);
-    jsDiv = convert(vDOM[1]);
-    document.body.replaceChildren(jsInput, jsDiv);
+    elems = vDOM.map(convert);
+    jsInput = elems[0];
+    jsDiv = elems[1];
+    document.body.replaceChildren(...elems);
     if (isFocus) jsInput.focus();
 }
 
@@ -59,4 +62,5 @@ function convert(node) {
     return element;
 }
 
+updateDOM();
 setInterval(updateDOM, 1000);
