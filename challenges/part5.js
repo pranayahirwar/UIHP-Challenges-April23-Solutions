@@ -12,7 +12,7 @@ function updateData(keyInDataVar, value) {
     // create new key in data object with specified value.
     // Eg. updateData("newKeyName", "newValue");
     data[keyInDataVar] = value;
-    updateDOM();
+    requestAnimationFrame(updateDOM);
 }
 
 function createVDOM() {
@@ -58,4 +58,4 @@ function convert(node) {
 //     }
 // }
 
-updateDOM();
+requestAnimationFrame(updateDOM);
