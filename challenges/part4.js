@@ -43,41 +43,47 @@ function randomColor() {
   )`;
 }
 
+// Extra Challenge Part:4.2
+// Create function and return createElement Object for different type of element, with
+// special functionality
+
+function fnCreateInput(value, onInputCallbackFunction) {
+    const element = document.createElement("input");
+    if (value == "") {
+        element.placeholder = "Enter What's on your mind *^____^*";
+    } else {
+        element.value = value;
+    }
+    element.oninput = onInputCallbackFunction;
+    return element;
+}
+
+function fnCreateDiv(textcontext) {
+    const element = document.createElement("div");
+    element.textContent = textcontext;
+    element.style.borderColor = randomColor();
+    return element;
+}
+
 function createVDOM() {
     return [
-        [
-            "input",
-            myName,
-            function handle(event) {
-                myName = event.target.value;
-            },
-        ],
-        ["div", `Hello, ${myName}!`],
-        ["div", `Great Job!`],
-        ["div", `Another Element...!`],
+        fnCreateInput(myName, function handle(event) {
+            myName = event.target.value;
+        }),
+        fnCreateDiv(`Hello, ${myName}!`),
+        fnCreateDiv(`Great Job!`),
+        fnCreateDiv(`Another Element...!`),
     ];
 }
 
 function updateDOM() {
     document.activeElement === jsInput ? (isFocus = true) : (isFocus = false);
     vDOM = createVDOM();
-    elems = vDOM.map(convert);
-    jsInput = elems[0];
-    jsDiv = elems[1];
-    document.body.replaceChildren(...elems);
+    jsInput = vDOM[0];
+    jsDiv = vDOM[1];
+    document.body.replaceChildren(...vDOM);
     if (isFocus) jsInput.focus();
 }
 
-function convert(node) {
-    const element = document.createElement(node[0]);
-    element.textContent = node[1];
-    element.value = node[1];
-    element.oninput = node[2];
-    if (node[0] == "div") {
-        element.style.borderColor = randomColor();
-    }
-    return element;
-}
-
 updateDOM();
-// setInterval(updateDOM, 1000);
+setInterval(updateDOM, 2000);
