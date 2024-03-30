@@ -1,10 +1,17 @@
 let isFocus = false;
-let myName = "";
+let data = {
+    myName: "",
+    demodataOne: "I am demo data One",
+    demodataTwo: "I am demo data Two",
+};
 let vDOM;
 let elems;
 
-function updateMyName(value) {
-    myName = value;
+function updateData(keyInDataVar, value) {
+    // Below code will update the key with specified value, if key is not present i will
+    // create new key in data object with specified value.
+    // Eg. updateData("newKeyName", "newValue");
+    data[keyInDataVar] = value;
     updateDOM();
 }
 
@@ -12,12 +19,12 @@ function createVDOM() {
     return [
         [
             "input",
-            myName,
+            data.myName,
             function handle(e) {
-                updateMyName(e.target.value)
+                updateData("myName", e.target.value);
             },
         ],
-        ["div", `Hello, ${myName}!`],
+        ["div", `Hello, ${data.myName}!`],
         ["div", `Great job, Jonathan!`],
         ["div", `Great job, Alexa!`],
         ["div", `Great job, Emilia!`],
