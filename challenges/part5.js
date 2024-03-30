@@ -3,13 +3,18 @@ let myName = "";
 let vDOM;
 let elems;
 
+function updateMyName(value) {
+    myName = value;
+    updateDOM();
+}
+
 function createVDOM() {
     return [
         [
             "input",
             myName,
             function handle(e) {
-                myName = e.target.value;
+                updateMyName(e.target.value)
             },
         ],
         ["div", `Hello, ${myName}!`],
