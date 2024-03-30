@@ -29,6 +29,20 @@ let jsInput;
 let jsDiv;
 let vDOM;
 
+// Extra Challenge Part:4.1
+function fnReturnRandomNumberFromZeroTo(num) {
+    return Math.floor(Math.random() * (num + 1));
+}
+
+function randomColor() {
+    // random rgb color generator
+    return `rgb(
+    ${fnReturnRandomNumberFromZeroTo(255)},
+    ${fnReturnRandomNumberFromZeroTo(255)},
+    ${fnReturnRandomNumberFromZeroTo(255)}
+  )`;
+}
+
 function createVDOM() {
     return [
         [
@@ -59,8 +73,11 @@ function convert(node) {
     element.textContent = node[1];
     element.value = node[1];
     element.oninput = node[2];
+    if (node[0] == "div") {
+        element.style.borderColor = randomColor();
+    }
     return element;
 }
 
 updateDOM();
-setInterval(updateDOM, 1000);
+// setInterval(updateDOM, 1000);
